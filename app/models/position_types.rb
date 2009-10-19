@@ -23,12 +23,12 @@ class PositionTypes
   end
 
   @@postionTypes = [
-    PositionTypes.new(:id => 0,   :name => ''    ),
-    PositionTypes.new(:id => 1,   :name => 'Faculty'    ),
-    PositionTypes.new(:id => 2,  :name => 'Fellows' ),
+    PositionTypes.new(:id => 0, :name => ''    ),
+    PositionTypes.new(:id => 1, :name => 'Faculty'    ),
+    PositionTypes.new(:id => 2, :name => 'Fellows' ),
     PositionTypes.new(:id => 3, :name => 'Staff'),
     PositionTypes.new(:id => 4, :name => 'Students'   ),
     PositionTypes.new(:id => 5, :name => 'Affiliated'   ),
     PositionTypes.new(:id => 6, :name => 'Alumni'   )
   ]
-en
+end
