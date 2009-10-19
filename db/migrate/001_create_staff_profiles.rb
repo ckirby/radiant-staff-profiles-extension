@@ -4,7 +4,7 @@ class CreateStaffProfiles < ActiveRecord::Migration
       t.string   :first_name
       t.string   :last_name
       t.string   :title
-      t.string   :email
+      t.string   :email_1
       t.integer  :status_id,  :default => 1, :null => false
       t.string   :filter_id
       t.text     :biography
