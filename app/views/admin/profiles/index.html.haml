@@ -31,6 +31,7 @@
   %thead
     %tr
       %th.name Name
+      %th.position Postion Type
       %th.program Title
       %th.status Status
       %th.modify Modify
@@ -45,6 +46,7 @@
             %span.w1
               = link_to profile.full_name, edit_admin_profile_url(profile)
 
+          %td.status= profile.positionType.name
           %td.title= profile.title
           %td.status{:class => "#{profile.status.name.downcase}-status"}= profile.status.name
           %td.remove
