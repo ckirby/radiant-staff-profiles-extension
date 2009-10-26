@@ -20,6 +20,24 @@ module ProfileTags
     raise TagError, "'profile' tag must contain a valid 'name' attribute." unless tag.locals.profile
     tag.expand
   end
+  
+  desc %{
+    Fetches a profile by neam requested with the url parameter 'name'
+
+    *Usage:*
+    <pre><code><r:profile_get>...</r:profile_get></code></pre>
+  }
+  tag 'profile_get' do |tag|
+    if (request.parameters[:name])
+      name = request.parameters[:name].split(' ')
+      last_name = name.pop
+      first_name = name.join(' ')
+      tag.locals.profile = StaffProfile.find_by_name(name)
+    end
+
+    raise "<script language='javascript'> location.href='/404.html';</script>" unless tag.locals.profile
+    tag.expand
+  end
 
   desc %{
     Gives access to the available profiles.
@@ -55,7 +73,7 @@ module ProfileTags
     results
   end
 
-  { :name => :full_name, :title => :title, :email => :email, :biography => :filtered_biography }.each do |name, attr|
+  { :name => :full_name, :title => :title, :email => :email, :biography => :filtered_biography, :address => :address, :degree => :degree, :affiliations => :affiliations, :clinical_interests => :clinical_interests, :website => :website, :phone => :phone, :fax => :fax, :publications => :publications, :position => :position_name, :research => :research  }.each do |name, attr|
     desc %{
       Returns the #{name.to_s} of the staff member.
   

@@ -5,7 +5,7 @@ class CreateStaffProfiles < ActiveRecord::Migration
       t.string   :last_name
       t.string   :degree
       t.string   :title
-      t.integer  :position_type,  :default => 0, :null => false
+      t.integer  :position_type_id,  :default => 0, :null => false
       t.string   :email
       t.string   :phone
       t.string   :fax

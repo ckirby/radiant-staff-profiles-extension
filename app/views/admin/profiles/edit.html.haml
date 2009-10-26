@@ -43,7 +43,7 @@
   .form-area
     %p.title
       %label Position Type
-      = f.collection_select :position_type, PositionTypes.find_all, :id, :name, {}, :class => 'selectbox'
+      = f.collection_select :position_type_id, PositionTypes.find_all, :id, :name, {}, :class => 'selectbox'
     %p.title
       %label First Name
       = f.text_field :first_name, :class => 'textbox'

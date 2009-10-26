@@ -1,5 +1,6 @@
 class StaffProfile < ActiveRecord::Base
   belongs_to :status
+  belongs_to :position_type
 
   has_attached_file :photo, :styles => { :profile => '110x140' }
 
@@ -15,6 +16,15 @@ class StaffProfile < ActiveRecord::Base
     self.status_id = value.id
   end
 
+  def position
+    PositionType.find(self.position_type_id)
+  end
+
+  def position=(value)
+    self.position_type_id = value.id
+  end
+
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -25,5 +35,9 @@ class StaffProfile < ActiveRecord::Base
     else
       self.biography
     end
+  end
+  
+  def position_name
+    position.name
   end
 end
