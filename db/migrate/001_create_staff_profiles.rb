@@ -1,6 +1,7 @@
 class CreateStaffProfiles < ActiveRecord::Migration
   def self.up
     create_table :staff_profiles do |t|
+      t.string   :uuid
       t.string   :first_name
       t.string   :last_name
       t.string   :degree

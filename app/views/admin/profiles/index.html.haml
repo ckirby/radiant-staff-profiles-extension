@@ -25,7 +25,7 @@
     #content #staff_profiles.index .page .info
       top: 0
 
-%h1 Staff Profiles
+%h1 Staff Profiles 
 
 %table#staff_profiles.index{:summary=>"Listing of staff members"}
   %thead
@@ -45,8 +45,8 @@
           %td.page
             %span.w1
               = link_to profile.full_name, edit_admin_profile_url(profile)
-
-          %td.status= profile.position.name
+		  
+          %td.status= profile.position.name 
           %td.title= profile.title
           %td.status{:class => "#{profile.status.name.downcase}-status"}= profile.status.name
           %td.remove

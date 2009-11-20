@@ -2,11 +2,11 @@ class StaffProfile < ActiveRecord::Base
   belongs_to :status
   belongs_to :position_type
 
-  has_attached_file :photo, :styles => { :profile => '110x140' }
+  has_attached_file :photo, :styles => { :profile => '165x210' }
 
   #validates_attachment_presence :photo
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/jpg']
-  validates_presence_of :first_name, :last_name
+  validates_presence_of :first_name, :last_name, :position_type_id
 
   def status
     Status.find(self.status_id)

@@ -23,7 +23,6 @@ class PositionType
   end
 
   @@postionType = [
-    PositionType.new(:id => 0, :name => ''    ),
     PositionType.new(:id => 1, :name => 'Faculty'    ),
     PositionType.new(:id => 2, :name => 'Fellows' ),
     PositionType.new(:id => 3, :name => 'Staff'),

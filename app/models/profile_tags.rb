@@ -4,32 +4,38 @@ module ProfileTags
   class TagError < StandardError; end
 
   desc %{
-    Causes the tags referring to a profile's attributes to refer to the current profile.
-    Fetches a profile requested by 'name' in the tag or with the url parameter 'id' which is the uuid of the row. If the user has an alternate website defined in their profile, they will get redirected to that page.
-
-    *Usage:*
-    <pre><code><r:profile [name="Scott Summers"]>...</r:profile></code></pre>
-  }
-  tag 'profile' do |tag|
-    if tag.attr['name']
-      name = tag.attr['name'].split(' ')
-      last_name = name.pop
-      first_name = name.join(' ')
-      tag.locals.profile = StaffProfile.find_by_first_name_and_last_name(first_name, last_name)
-    elsif (request.parameters[:id])
-      id = request.parameters[:id]
-      tag.locals.profile = StaffProfile.find_by_uuid(id)
-    end
-
-    raise "<script language='javascript'> location.href='/people';</script>" unless tag.locals.profile
-    
-    profile = tag.locals.profile
-    if (profile.website != '')
-      "<script language='javascript'> location.href='http://#{profile.website}';</script>"
-    else
-      tag.expand
-    end
-  end
+     Causes the tags referring to a profile's attributes to refer to the current profile.
+     Fetches a profile requested by 'name' in the tag
+     *Usage:*
+     <pre><code><r:profile [name="Scott Summers"]>...</r:profile></code></pre>
+   }
+   tag 'profile' do |tag|
+     if tag.attr['name']
+       name = tag.attr['name'].split(' ')
+       last_name = name.pop
+       first_name = name.join(' ')
+       tag.locals.profile = StaffProfile.find_by_first_name_and_last_name(first_name, last_name)
+     end
+  
+     raise "<script language='javascript'> location.href='/people';</script>" unless tag.locals.profile
+     tag.expand
+   end
+ 
+   desc %{
+     Fetches a profile requested with the url parameter 'id' which is the uuid of the row. If the user has an alternate website defined in their profile, they will get redirected to that page.
+ 
+     *Usage:*
+     <pre><code><r:get_profile>...</r:get_profile></code></pre>
+   }
+   tag 'get_profile' do |tag| 
+       if (request.parameters[:id])
+         id = request.parameters[:id]
+         tag.locals.profile = StaffProfile.find_by_uuid(id)
+       end
+     raise "<script language='javascript'> location.href='/people';</script>" unless tag.locals.profile
+     tag.expand
+   end
+  
 
   desc %{
     Gives access to the available profiles.
@@ -78,22 +84,32 @@ module ProfileTags
     results
   end
 
-  { :name => :full_name, :title => :title, :email => :email, :biography => :filtered_biography, :address => :address, :degree => :degree, :affiliations => :affiliations, :clinical_interests => :clinical_interests, :website => :website, :phone => :phone, :fax => :fax, :publications => :publications, :position => :position_name, :research => :research, :id => :uuid  }.each do |name, attr|
-    desc %{
-      Returns the #{name.to_s} of the staff member. When used as a double tag, the part between both tags will prepend the value of the tag IF the tag has a value other than ''.
-  
-      *Usage:*
-      <pre><code><r:profile:#{name.to_s}/></code></pre>
-    }
+  { :name => :full_name, :job_title => :title, :email => :email, :biography => :filtered_biography, :address => :address, :degree => :degree, :affiliations => :affiliations, :clinical_interests => :clinical_interests, :website => :website, :phone => :phone, :fax => :fax, :publications => :publications, :position => :position_name, :research => :research, :id => :uuid  }.each do |name, attr|
+  desc %{
+    Returns the #{name.to_s} of the staff member.
+    *Usage:*
+    <pre><code><r:profile:#{name.to_s}/></code></pre>
+  }
     tag "profile:#{name}" do |tag|
       profile = tag.locals.profile
-      header = ''
+      double_text = ''
       if (profile.send(attr) != '' && tag.double?)
-        header = tag.expand
+        double_text = tag.expand
+        tag.attr['show_text'] ||= 'before'
+        showwhere = tag.attr['show_text']
+        if (showwhere == 'after')
+          profile.send(attr) << double_text
+        elsif (showwhere == 'only')
+          double_text
+        else
+          double_text << profile.send(attr)
+        end
+      else
+        profile.send(attr)
       end
-      header << profile.send(attr)
     end
   end
+
 
   desc %{
     Returns the profile image URL for a staff member.
