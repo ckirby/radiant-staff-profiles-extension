@@ -1,4 +1,4 @@
-class CreateStaffProfiles < ActiveRecord::Migration
+class AddLoginFieldsToStaffProfiles < ActiveRecord::Migration
   def self.up
     add_column "staff_profiles", "login", :string, :limit => 40, :default => "", :null => false
     add_column "staff_profiles", "password", :string, :limit => 40
