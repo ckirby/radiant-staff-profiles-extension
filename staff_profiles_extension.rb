@@ -8,8 +8,10 @@ class StaffProfilesExtension < Radiant::Extension
   
   define_routes do |map|
     map.namespace 'admin' do |admin|
-      admin.resources :profiles 
+      admin.resources :profiles   
     end
+    map.resources :staff_profile_admin, :only => [:edit, :show, :update]
+    map.staff_profile_admin_login '/staff_profile_admin', :controller => 'staff_profile_admin_login', :action => 'login'
   end
   
   def activate
