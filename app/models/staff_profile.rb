@@ -1,17 +1,17 @@
+require 'digest/sha1'
+
 class StaffProfile < ActiveRecord::Base
   belongs_to :status
   belongs_to :position_type
 
 
   # Validations
-  validates_uniqueness_of :login, :message => 'login already in use'
-
-  validates_confirmation_of :password, :message => 'must match confirmation', :if => :confirm_password?
-
   validates_presence_of :first_name, :last_name, :position_type_id, :login, :message => 'required'
   validates_presence_of :password, :password_confirmation, :message => 'required', :if => :new_record?
 
-  validates_format_of :email, :message => 'invalid e-mail address', :allow_nil => true, :with => /^$|^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  validates_uniqueness_of :login, :message => 'login already in use'
+
+  validates_confirmation_of :password, :message => 'must match confirmation', :if => :confirm_password?
 
   validates_length_of :login, :within => 3..40, :allow_nil => true, :too_long => '{{count}}-character limit', :too_short => '{{count}}-character minimum'
   validates_length_of :password, :within => 5..40, :allow_nil => true, :too_long => '{{count}}-character limit', :too_short => '{{count}}-character minimum', :if => :validate_length_of_password?
