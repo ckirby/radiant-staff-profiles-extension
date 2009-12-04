@@ -46,10 +46,10 @@
       = f.text_field :login, :class => 'textbox'
     %p.title
       %label New Password
-      = f.password_field :password, :class => 'textbox'
+      = f.password_field :password, :class => 'textbox', :value => ""
     %p.title
       %label Confirm Password
-      = f.password_field :password_confirmation, :class => 'textbox'
+      = f.password_field :password_confirmation, :class => 'textbox', :value => ""
     %p.title
       %label First Name (required)
       = f.text_field :first_name, :class => 'textbox'
