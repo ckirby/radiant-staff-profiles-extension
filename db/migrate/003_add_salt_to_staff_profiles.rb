@@ -1,4 +1,4 @@
-class AddSaltToUsers < ActiveRecord::Migration
+class AddSaltToStaffProfiles < ActiveRecord::Migration
   def self.up
     add_column :staff_profiles, :salt, :string
     StaffProfiles.reset_column_information
