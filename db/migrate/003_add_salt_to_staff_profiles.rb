@@ -1,8 +1,6 @@
 class AddSaltToStaffProfiles < ActiveRecord::Migration
   def self.up
-    add_column :staff_profiles, :salt, :string
-    StaffProfiles.reset_column_information
-    StaffProfiles.update_all :salt => "sweet harmonious biscuits"
+    add_column :staff_profiles, :salt, :string, :default=> "sweet harmonious biscuits"
   end
 
   def self.down
