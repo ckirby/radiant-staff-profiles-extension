@@ -11,7 +11,7 @@ class StaffProfilesExtension < Radiant::Extension
       admin.resources :profiles   
     end
     map.resources :staff_profile_admin, :only => [:edit, :show, :update]
-    map.staff_profile_admin_login '/staff_profile_admin/login', :controller => 'staff_profile_admin_login', :action => 'login'
+    map.staff_profile_admin_login '/staff_profile_admin', :controller => 'staff_profile_admin_login', :action => 'login'
   end
   
   def activate
