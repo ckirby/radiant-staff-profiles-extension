@@ -4,6 +4,22 @@ module ProfileTags
   class TagError < StandardError; end
 
   desc %{
+    Generates a login form for staff members to get to their stafff profile admin page
+ 
+    Usage:
+    <pre><code> <r:profile_login/></code></pre>
+  }
+  tag 'profile_login' do |tag|
+    results = []
+    action =  "/staff_profile_admin/login"
+    results << %(<form action="#{action}" method="post">)
+    results << %(<table><tr><td>Username:</td><td><input type="text" name="username"></td></tr>)
+    results << %(<tr><td>Password:</td><td><input type="password" name="password"></td></tr>)
+    results << %(</table><input type="submit" value="Login" />)
+    results << %(</form>)
+  end
+
+  desc %{
      Causes the tags referring to a profile's attributes to refer to the current profile.
      Fetches a profile requested by 'name' in the tag
      *Usage:*
