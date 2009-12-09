@@ -11,5 +11,6 @@ class StaffProfileAdminLoginController < ApplicationController
     else
       puts "No Login Info"
     end
+    redirect_to "http://boston.com"
   end
 end
