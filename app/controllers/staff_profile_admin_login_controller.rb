@@ -6,12 +6,7 @@ class StaffProfileAdminLoginController < ApplicationController
     if request.post?
       login = params[:username]
       password = params[:password]
-      announce_string = "Login: "
-      announce_string << login
-      announce_string << " "
-      announce_string << password
-      puts announce_string
-#     announce_invalid_user unless self.current_user = User.authenticate(login, password)
+#      announce_invalid_user unless self.current_user = User.authenticate(login, password)
     else
       render(:action => 'login')
     end
