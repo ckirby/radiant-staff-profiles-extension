@@ -1,5 +1,6 @@
 class StaffProfileAdminLoginController < ApplicationController
   no_login_required
+  skip_before_filter :verify_authenticity_token
 
   def login
     if request.post?
@@ -16,15 +17,4 @@ class StaffProfileAdminLoginController < ApplicationController
       session[:return_to] = nil
     end
   end
-
-  private
-
-    def announce_logged_out
-      flash[:notice] = 'You are now logged out.'
-    end
-
-    def announce_invalid_user
-      flash.now[:error] = 'Invalid username or password.'
-    end
-
 end
