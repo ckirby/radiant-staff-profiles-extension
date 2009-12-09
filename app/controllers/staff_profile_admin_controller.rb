@@ -11,6 +11,10 @@ class StaffProfileAdminController < ApplicationController
     @profile = StaffProfile.find(params[:id])
     render(:action => 'edit')
   end
+
+  def edit
+    render(:action => 'login')
+  end
   
   def update
     @profile = StaffProfile.find(params[:id])
