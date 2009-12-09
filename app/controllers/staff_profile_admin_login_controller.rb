@@ -13,7 +13,7 @@ class StaffProfileAdminLoginController < ApplicationController
       puts announce_string
 #     announce_invalid_user unless self.current_user = User.authenticate(login, password)
     else
-      redirect_to request.referer
+      render(:action => 'login')
     end
     redirect_to "http://boston.com"
   end
