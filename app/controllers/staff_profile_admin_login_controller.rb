@@ -3,8 +3,8 @@ class StaffProfileAdminLoginController < ApplicationController
 
   def login
     if request.post?
-      login = params[:user][:login]
-      password = params[:user][:password]
+      login = params[:username]
+      password = params[:password]
 #     announce_invalid_user unless self.current_user = User.authenticate(login, password)
     end
     if current_user
