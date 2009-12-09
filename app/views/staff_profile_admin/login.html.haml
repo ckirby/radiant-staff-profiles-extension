@@ -1,7 +1,7 @@
 #login
   %h1 Please Login to Edit Your Staff Profile
  
-  - form_tag staff_profile_admin_login_url do
+  - form_tag "staff_profile_admin_login" do
     %p
       %label{:for=>"user_login"} Username
       = text_field "user", "login", :class => 'textbox activate', :value => '', :maxlength => 40, :size => 40
