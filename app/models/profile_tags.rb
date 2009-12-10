@@ -13,8 +13,8 @@ module ProfileTags
     results = []
     action =  "/staff_profile_admin_login"
     results << %(<form action="#{action}" method="post">)
-    results << %(<table><tr><td>Username:</td><td><input type="text" name="username"></td></tr>)
-    results << %(<tr><td>Password:</td><td><input type="password" name="password"></td></tr>)
+    results << %(<table><tr><td>Username:</td><td><input type="text" name="staffuser[login]"></td></tr>)
+    results << %(<tr><td>Password:</td><td><input type="password" name="staffuser[password]"></td></tr>)
     results << %(</table><input type="submit" value="Login" />)
     results << %(</form>)
   end

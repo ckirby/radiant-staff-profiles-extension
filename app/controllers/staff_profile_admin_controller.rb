@@ -7,13 +7,13 @@ class StaffProfileAdminController < ApplicationController
     if request.post?
       login = params[:staffuser][:login]
       password = params[:staffuser][:password]
-      puts "READ FORM: #{$login} #{$password}" 
       announce_invalid_user unless current_staff_user = StaffProfile.authenticate(login, password)
     else
       render(:action => 'login')
     end
-#    redirect_to (session[:return_to] || login_staff_profile_admin)
-#    session[:return_to] = nil
+    if current_staff_user
+      redirect_to staff_profile_admin_url(current_staff_user.id)
+    end
   end
   
   def show
