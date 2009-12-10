@@ -5,9 +5,9 @@ class StaffProfileAdminController < ApplicationController
 
   def login
     if request.post?
-      login = params[:username]
-      password = params[:password]
-      puts "READ FORM: " + login + " " + password
+      login = params[:staffuser][:login]
+      password = params[:staffuser][:password]
+      puts "READ FORM: #{$login} #{$password}" 
       announce_invalid_user unless current_staff_user = StaffProfile.authenticate(login, password)
     else
       render(:action => 'login')

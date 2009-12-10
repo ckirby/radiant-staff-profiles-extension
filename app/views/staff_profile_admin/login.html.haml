@@ -3,11 +3,11 @@
  
   - form_tag "staff_profile_admin_login" do
     %p
-      %label{:for=>"user_login"} Username
-      = text_field "user", "login", :class => 'textbox activate', :value => '', :maxlength => 40, :size => 40
+      %label{:for=>"staffuser_login"} Username
+      = text_field "staffuser", "login", :class => 'textbox activate', :value => '', :maxlength => 40, :size => 40
     %p
-      %label{:for=>"user_password"} Password
-      = password_field "user", "password", :class => 'textbox password', :value => '', :maxlength => 40, :size => 40
+      %label{:for=>"staffuser_password"} Password
+      = password_field "staffuser", "password", :class => 'textbox password', :value => '', :maxlength => 40, :size => 40
       &nbsp;
       %span.remember_me
         = check_box_tag :remember_me, 1, false, :class => 'checkbox'

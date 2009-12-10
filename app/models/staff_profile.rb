@@ -43,7 +43,7 @@ class StaffProfile < ActiveRecord::Base
   end
 
   def self.authenticate(login, password)
-    puts "AUTHENTICATING: "+login
+    puts "AUTHENTICATING: " + login
     staff_profile_user = find_by_login(login)
     staff_profile_user if staff_profile_user && staff_profile_user.authenticated?(password)
   end
