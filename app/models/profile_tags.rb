@@ -11,7 +11,7 @@ module ProfileTags
   }
   tag 'profile_login' do |tag|
     results = []
-    action =  "/staff_profile_admin/login"
+    action =  "/staff_profile_admin_login"
     results << %(<form action="#{action}" method="post">)
     results << %(<table><tr><td>Username:</td><td><input type="text" name="username"></td></tr>)
     results << %(<tr><td>Password:</td><td><input type="password" name="password"></td></tr>)

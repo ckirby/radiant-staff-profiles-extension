@@ -7,12 +7,12 @@ class StaffProfileAdminController < ApplicationController
     if request.post?
       login = params[:username]
       password = params[:password]
-#      announce_invalid_user unless self.current_user = User.authenticate(login, password)
+      announce_invalid_user unless self.current_staff_user = StaffProfile.authenticate(login, password)
     else
-      announce_invalid_user
       render(:action => 'login')
     end
-    redirect_to "http://boston.com"
+#    redirect_to (session[:return_to] || login_staff_profile_admin)
+#    session[:return_to] = nil
   end
   
   def show
@@ -29,7 +29,7 @@ class StaffProfileAdminController < ApplicationController
     @profile = StaffProfile.find(params[:id])
     if @profile.update_attributes(params[:profile])
       flash[:notice] = "Successfully updated the profile details."
-      redirect_to(admin_profiles_path)
+      render(:action => 'show')
     else
       flash[:error] = "Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing."
       render(:action => 'edit')
