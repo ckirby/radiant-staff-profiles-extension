@@ -13,6 +13,7 @@ class StaffProfilesExtension < Radiant::Extension
     map.resources :staff_profile_admin, :only => [:edit, :show, :update]
     map.with_options(:controller => 'staff_profile_admin') do |spa|
       spa.login   'staff_profile_admin_login',      :action => 'login'
+      spa.login   'staff_profile_admin_logout',      :action => 'logout'
     end
 #    map.staff_profile_admin_login '/staff_profile_admin/login', :controller => 'staff_profile_admin_login', :action => 'login'
   end
