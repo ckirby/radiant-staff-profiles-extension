@@ -8,12 +8,12 @@ class StaffProfileAdminController < ApplicationController
       login = params[:staffuser][:login]
       password = params[:staffuser][:password]
       announce_invalid_user unless current_staff_user = StaffProfile.authenticate(login, password)
-    else
-      render(:action => 'login')
     end
     if current_staff_user
       session[:staff_user_uuid] = current_staff_user.uuid
       redirect_to staff_profile_admin_url(current_staff_user.id)
+    else
+      render(:action => 'login')
     end
   end
 
