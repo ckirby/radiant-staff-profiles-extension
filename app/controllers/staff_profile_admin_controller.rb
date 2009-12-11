@@ -12,33 +12,50 @@ class StaffProfileAdminController < ApplicationController
       render(:action => 'login')
     end
     if current_staff_user
+      session[:staff_user_uuid] = current_staff_user.uuid
       redirect_to staff_profile_admin_url(current_staff_user.id)
     end
   end
+
+  def logout
+    session[:staff_user_uuid] = nil
+    announce_logged_out
+    render(:action => 'login')
+  end
   
   def show
-    id = params[:id]
-    if id != current_staff_user.id
+    @profile = StaffProfile.find(params[:id])
+    if @profile.uuid != session[:staff_user_uuid]
+      @profile = nil
       render(:action => 'login')
     else
-      @profile = StaffProfile.find(params[:id])
       render(:action => 'show')
     end
   end
   
   def edit
     @profile = StaffProfile.find(params[:id])
-    render(:action => 'edit')
+    if @profile.uuid != session[:staff_user_uuid]
+      @profile = nil
+      render(:action => 'login')
+    else
+      render(:action => 'edit')
+    end
   end
 
   def update
     @profile = StaffProfile.find(params[:id])
-    if @profile.update_attributes(params[:profile])
-      flash[:notice] = "Successfully updated the profile details."
-      render(:action => 'show')
+    if @profile.uuid != session[:staff_user_uuid]
+      @profile = nil
+      render(:action => 'login')
     else
-      flash[:error] = "Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing."
-      render(:action => 'edit')
+      if @profile.update_attributes(params[:profile])
+        flash[:notice] = "Successfully updated the profile details."
+        render(:action => 'show')
+      else
+        flash[:error] = "Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing."
+        render(:action => 'edit')
+      end
     end
   end
 
