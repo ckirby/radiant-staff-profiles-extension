@@ -9,8 +9,5 @@
       %label{:for=>"staffuser_password"} Password
       = password_field "staffuser", "password", :class => 'textbox password', :value => '', :maxlength => 40, :size => 40
       &nbsp;
-      %span.remember_me
-        = check_box_tag :remember_me, 1, false, :class => 'checkbox'
-        %label.checkbox{:for=>"remember_me"} Remember me
     %p.buttons
       %input.button{:type=>"submit", :value=>"Login"}

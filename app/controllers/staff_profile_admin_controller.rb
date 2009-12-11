@@ -17,8 +17,13 @@ class StaffProfileAdminController < ApplicationController
   end
   
   def show
-    @profile = StaffProfile.find(params[:id])
-    render(:action => 'show')
+    id = params[:id]
+    if id != current_staff_user.id
+      render(:action => 'login')
+    else
+      @profile = StaffProfile.find(params[:id])
+      render(:action => 'show')
+    end
   end
   
   def edit
