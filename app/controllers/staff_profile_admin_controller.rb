@@ -13,7 +13,7 @@ class StaffProfileAdminController < ApplicationController
       session[:staff_user_uuid] = current_staff_user.uuid
       redirect_to staff_profile_admin_url(current_staff_user.id)
     else
-      render(:action => 'login')
+      render(:action => 'login') #THIS IS STILL CAUSING AN ERROR IF YOU TRY TO GO DIRECTLY TO THE SHOW ACTION AND GET REDIRECTED TO THE LOGIN SCREEN
     end
   end
 

@@ -1,0 +1,109 @@
+- content_for 'page_css' do
+  :sass
+    div.biography
+      margin: 5px 20px
+      color: #444
+
+    p.title
+      margin: 10px 0 !important
+
+    #content .form-area div.error-with-field
+      input.textbox
+        font-family: Georgia,Palatino,"Times New Roman",Times,serif
+        font-size: 200%
+        width: 100%
+
+    textarea.textarea-small
+      height: 75px !important
+      width: 100%
+      display: block
+
+    textarea.textarea-large
+      height: 150px !important
+      width: 100%
+      display: block
+
+    select.selectbox
+      font-family: Georgia,Palatino,"Times New Roman",Times,serif
+      font-size: 150%
+
+    input.file
+      margin: 50px 0
+
+    img.photo
+      margin: 5px 0
+      border: 2px solid #fff
+
+%h1= 'Edit Staff Profile'
+
+- form_for_staff_profile_admin @profile do |f|
+  .form-area
+    %p.title
+      %label Position Type (required)
+      = f.collection_select :position_type_id, PositionType.find_all, :id, :name, { :include_blank => true }, :class => 'selectbox'
+    %p.title
+      %label Username (required)
+      = f.text_field :login, :class => 'textbox'
+    %p.title
+      %label New Password
+      = f.password_field :password, :class => 'textbox', :value => ""
+    %p.title
+      %label Confirm Password
+      = f.password_field :password_confirmation, :class => 'textbox', :value => ""
+    %p.title
+      %label First Name (required)
+      = f.text_field :first_name, :class => 'textbox'
+    %p.title
+      %label Last Name (required)
+      = f.text_field :last_name, :class => 'textbox'
+    %p.title
+      %label Degree(s)
+      = f.text_field :degree, :class => 'textbox'
+    %p.title
+      %label Title
+      = f.text_field :title, :class => 'textbox'
+    %p.title
+      %label Email
+      = f.text_field :email, :class => 'textbox'
+    %p.title
+      %label Phone
+      = f.text_field :phone, :class => 'textbox'
+    %p.title
+      %label Fax
+      = f.text_field :fax, :class => 'textbox'
+    %p.title
+      %label Alternate Website
+      = f.text_field :website, :class => 'textbox'
+    %p.title
+      %label Address
+      = f.text_area :address, :class => 'textarea-small'
+    %p.title
+      %label Biography
+      = f.text_area :biography, :class => 'textarea-large'
+    %p.title
+      %label Affiliations
+      = f.text_area :affiliations, :class => 'textarea-small'
+    %p.title
+      %label Research
+      = f.text_area :research, :class => 'textarea-small'
+    %p.title
+      %label Clinical Interests
+      = f.text_area :clinical_interests, :class => 'textarea-small'
+    %p.title
+      %label Publications
+      = f.text_area :publications, :class => 'textarea-large'
+    %p.title
+      %label Status
+      = f.collection_select :status_id, Status.find_all, :id, :name, {}, :class => 'selectbox'
+    %p.title
+      %label Photo
+      = image_tag(@profile.photo.url(:profile), :class => 'photo')
+      %br
+      = f.file_field :photo, :class => 'button'
+      = f.hidden_field :uuid, :value => "x_#{`uuidgen`.strip}"
+
+  %p.buttons
+    - button_text = @profile.new_record? ? 'Create' : 'Save Changes'
+    = submit_tag button_text, :class => 'button'
+    or
+    = link_to 'Cancel', admin_profiles_url
