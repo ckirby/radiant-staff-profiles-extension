@@ -85,7 +85,7 @@ class StaffProfile < ActiveRecord::Base
 
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{middle_initial} #{last_name}"
   end
 
   def filtered_biography

@@ -13,21 +13,21 @@ class StaffProfileAdminController < ApplicationController
       session[:staff_user_uuid] = current_staff_user.uuid
       redirect_to staff_profile_admin_url(current_staff_user.id)
     else
-      render(:action => 'login') #THIS IS STILL CAUSING AN ERROR IF YOU TRY TO GO DIRECTLY TO THE SHOW ACTION AND GET REDIRECTED TO THE LOGIN SCREEN
+      render(:action => 'login')
     end
   end
 
   def logout
     session[:staff_user_uuid] = nil
     announce_logged_out
-    render(:action => 'login')
+    redirect_to "/staff_profile_admin_login"
   end
   
   def show
     @profile = StaffProfile.find(params[:id])
     if @profile.uuid != session[:staff_user_uuid]
       @profile = nil
-      render(:action => 'login')
+      redirect_to "/staff_profile_admin_login"
     else
       render(:action => 'show')
     end
@@ -37,7 +37,7 @@ class StaffProfileAdminController < ApplicationController
     @profile = StaffProfile.find(params[:id])
     if @profile.uuid != session[:staff_user_uuid]
       @profile = nil
-      render(:action => 'login')
+      redirect_to "/staff_profile_admin_login"
     else
       render(:action => 'edit')
     end
@@ -47,7 +47,7 @@ class StaffProfileAdminController < ApplicationController
     @profile = StaffProfile.find(params[:id])
     if @profile.uuid != session[:staff_user_uuid]
       @profile = nil
-      render(:action => 'login')
+      redirect_to "/staff_profile_admin_login"
     else
       if @profile.update_attributes(params[:profile])
         flash[:notice] = "Successfully updated the profile details."
