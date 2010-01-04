@@ -18,7 +18,7 @@ class StaffProfilesExtension < Radiant::Extension
   end
   
   def activate
-    admin.tabs.add "Profiles", "/admin/profiles", :visibility => [:all]
+    admin.tabs.add "Profiles", "/admin/profiles", :visibility => [:admin]
     Page.send :include, ProfileTags
   end
   
