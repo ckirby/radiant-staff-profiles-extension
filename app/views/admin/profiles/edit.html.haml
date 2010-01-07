@@ -166,10 +166,11 @@
           = image_tag(@profile.photo.url(:profile), :class => 'photo')
           %br
           = f.file_field :photo, :class => 'button'
-          = f.hidden_field :uuid, :value => "x_#{`uuidgen`.strip}"
+          = if @profile.new_record? 
+            = f.hidden_field :uuid, :value => "x_#{`uuidgen`.strip}"
 
   %p.buttons
     - button_text = @profile.new_record? ? 'Create' : 'Save Changes'
     = submit_tag button_text, :class => 'button'
     or
-    = link_to 'Cancel', staff_profile_admin_url
+    = link_to 'Cancel', admin_profiles_url

@@ -165,7 +165,6 @@
           = image_tag(@profile.photo.url(:profile), :class => 'photo')
           %br
           = f.file_field :photo, :class => 'button'
-          = f.hidden_field :uuid, :value => "x_#{`uuidgen`.strip}"
 
   %p.buttons
     - button_text = @profile.new_record? ? 'Create' : 'Save Changes'

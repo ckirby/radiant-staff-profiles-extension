@@ -33,7 +33,7 @@ module ProfileTags
        tag.locals.profile = StaffProfile.find_by_first_name_and_last_name(first_name, last_name)
      end
   
-     raise "<script language='javascript'> location.href='/people';</script>" unless tag.locals.profile
+     raise "Unknown Person " << tag.attr['name'] unless tag.locals.profile
      tag.expand
    end
  
@@ -48,7 +48,7 @@ module ProfileTags
          id = request.parameters[:id]
          tag.locals.profile = StaffProfile.find_by_uuid(id)
        end
-     raise "<script language='javascript'> location.href='/people';</script>" unless tag.locals.profile
+     raise "No Person with that UUID" unless tag.locals.profile
      tag.expand
    end
   
