@@ -88,6 +88,10 @@ class StaffProfile < ActiveRecord::Base
     "#{first_name} #{middle_initial} #{last_name}"
   end
 
+  def lookup_name
+    "#{first_name} #{last_name}"
+  end
+
   def filtered_biography
     if defined? TextileFilter
       TextileFilter.filter(self.biography)

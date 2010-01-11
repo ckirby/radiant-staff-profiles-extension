@@ -1,5 +1,5 @@
 class Admin::ProfilesController < ApplicationController
-  only_allow_access_to :index, :show, :new, :create, :edit, :update, :remove, :destroy,
+  only_allow_access_to :index, :new, :create, :edit, :update, :destroy,
     :when => :admin,
     :denied_url => { :controller => 'pages', :action => 'index' },
     :denied_message => 'You must have administrative privileges to perform this action.'

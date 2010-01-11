@@ -44,7 +44,7 @@
         %tr.node.level-1{:id => "profile-#{profile.id}"}
           %td.page
             %span.w1
-              = link_to profile.full_name, edit_admin_profile_url(profile)
+              = link_to profile.lookup_name, edit_admin_profile_url(profile)
 		  
           %td.status= profile.position.name 
           %td.title= profile.title
