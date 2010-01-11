@@ -62,7 +62,7 @@ class StaffProfileAdminController < ApplicationController
   private
 
     def announce_logged_out
-      flash[:notice] = 'You are now logged out.'
+      flash.now[:notice] = 'You are now logged out.'
     end
 
     def announce_invalid_user

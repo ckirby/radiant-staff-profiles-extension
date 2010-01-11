@@ -1,8 +1,5 @@
-# Uncomment this if you reference any of your controllers in activate
-# require_dependency 'application'
-
 class StaffProfilesExtension < Radiant::Extension
-  version "0.1"
+  version "1.0"
   description "Adds the abilitiy to create and display staff and member profile information. Thanks to Zapnap for the original code"
   url "http://github.com/ckirby/radiant-staff-profiles-extension"
   
