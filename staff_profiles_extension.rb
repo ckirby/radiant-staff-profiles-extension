@@ -2,9 +2,9 @@
 # require_dependency 'application'
 
 class StaffProfilesExtension < Radiant::Extension
-  version "0.2"
-  description "Adds the abilitiy to create and display staff and member profile information"
-  url "http://github.com/zapnap/radiant-staff-profiles-extension"
+  version "0.1"
+  description "Adds the abilitiy to create and display staff and member profile information. Thanks to Zapnap for the original code"
+  url "http://github.com/ckirby/radiant-staff-profiles-extension"
   
   define_routes do |map|
     map.namespace 'admin' do |admin|
@@ -18,7 +18,7 @@ class StaffProfilesExtension < Radiant::Extension
   end
   
   def activate
-    admin.tabs.add "Profiles", "/admin/profiles", :visibility => [:admin]
+    admin.tabs.add "Profiles", "/admin/profiles", :visibility => [:admin, :developer]
     Page.send :include, ProfileTags
   end
   
