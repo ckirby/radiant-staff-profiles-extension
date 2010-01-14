@@ -4,6 +4,7 @@ class Admin::ProfilesController < ApplicationController
     :denied_url => { :controller => 'profiles', :action => 'index' },
     :denied_message => 'You must have administrative privileges to perform this action.'
   
+
   def index
     @profiles = StaffProfile.find(:all, :order => "last_name, first_name")
     render(:action => 'index')

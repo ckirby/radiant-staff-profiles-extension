@@ -11,7 +11,8 @@ class StaffProfile < ActiveRecord::Base
 
   validates_uniqueness_of :login, :message => 'login already in use'
 
-  validates_confirmation_of :password, :message => 'must match confirmation', :if => :confirm_password?
+  validates_presence_of :password, :message => 'required', :if => :new_record?
+  validates_confirmation_of :password, :password_confirmation, :message => 'must match confirmation', :if => :confirm_password?
 
   validates_length_of :login, :within => 3..40, :allow_nil => true, :too_long => '{{count}}-character limit', :too_short => '{{count}}-character minimum'
   validates_length_of :password, :within => 5..40, :allow_nil => true, :too_long => '{{count}}-character limit', :too_short => '{{count}}-character minimum', :if => :validate_length_of_password?
@@ -22,21 +23,6 @@ class StaffProfile < ActiveRecord::Base
 
   #validates_attachment_presence :photo
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/jpg']
-
-#  class << self
-#    def protected_attributes
-#      @protected_attributes ||= [:name, :email, :login, :password, :password_confirmation]
-#    end
-
-#    def protected_attributes=(array)
-#      @protected_attributes = array.map{|att| att.to_sym }
-#    end
-#  end
-
-
-#  def has_role?(role)
-#    respond_to?("#{role}?") && send("#{role}?")
-#  end
 
   def sha1(phrase)
     Digest::SHA1.hexdigest("--#{salt}--#{phrase}--")

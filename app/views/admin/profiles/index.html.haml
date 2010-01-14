@@ -34,7 +34,9 @@
       %th.position Postion Type
       %th.program Title
       %th.status Status
-      %th.modify Modify
+      %th.updated Last Updated
+      -if current_user.admin?
+        %th.modify Modify
   %tbody
     - if @profiles.empty?
       %tr
@@ -42,14 +44,20 @@
     - else 
       - @profiles.each do |profile|
         %tr.node.level-1{:id => "profile-#{profile.id}"}
-          %td.page
+          %td.name
             %span.w1
-              = link_to profile.lookup_name, edit_admin_profile_url(profile)
+              -if current_user.admin?
+                = link_to profile.lookup_name, edit_admin_profile_url(profile)
+              -else
+                = profile.lookup_name
 		  
           %td.status= profile.position.name 
           %td.title= profile.title
           %td.status{:class => "#{profile.status.name.downcase}-status"}= profile.status.name
-          %td.remove
-            = link_to("#{image('minus.png')} Remove", admin_profile_url(profile), :method => :delete, :alt => 'remove profile', :confirm => 'Are you sure? This will delete the profile!')
+          %td.updated= profile.updated_at
+          -if current_user.admin?
+            %td.remove
+              = link_to("#{image('minus.png')} Remove", admin_profile_url(profile), :method => :delete, :alt => 'remove profile', :confirm => 'Are you sure? This will delete the profile!')
 
-%p.new= link_to('New Profile', new_admin_profile_url)
+-if current_user.admin?
+  %p.new= link_to('New Profile', new_admin_profile_url)
