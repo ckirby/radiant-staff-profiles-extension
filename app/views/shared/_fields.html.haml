@@ -1,7 +1,8 @@
 %table
   %tr
     %td
-      %label Position Type (required) = link to "What Is This?", "/staff_profile_help.html" :class => "help" :anchor => "position", target => "_blank"
+      %label Position Type (required) 
+      = link_to "What Is This?", "/staff_profile_help.html", :class => "help", :anchor => "position", :target => "_blank"
   %tr
     %td
       = f.collection_select :position_type_id, PositionType.find_all, :id, :name, { :include_blank => true }, :class => 'selectbox'
@@ -12,10 +13,6 @@
     %td
       = f.text_field :login, :class => 'textbox'
 %table
-  - if change_password?
-    %tr
-      %td
-        %label PASSWORD CHANGE REQUIRED
   %tr
     %td
       %label New Password
@@ -35,7 +32,8 @@
       = f.text_field :degree, :class => 'textbox'
   %tr
     %td
-      %label Title = link to "What Is This?", "/staff_profile_help.html" :class => "help" :anchor => "title", target => "_blank"
+      %label Title 
+      = link_to "What Is This?", "/staff_profile_help.html", :class => "help", :anchor => "title", :target => "_blank"
   %tr
     %td
       = f.text_field :title, :class => 'textbox'
@@ -59,7 +57,8 @@
       = f.text_field :fax, :class => 'textbox'
   %tr
     %td
-      %label Alternate Website (NOTE: Filling this out will cause your profile to redirect to the provided url) = link to "What Is This?", "/staff_profile_help.html" :class => "help" :anchor => "alternate_web", target => "_blank"
+      %label Alternate Website (NOTE: Filling this out will cause your profile to redirect to the provided url) 
+      = link_to "What Is This?", "/staff_profile_help.html", :class => "help", :anchor => "alternate_web", :target => "_blank"
   %tr
     %td
       = f.text_field :website, :class => 'textbox-long'
@@ -71,31 +70,36 @@
       = f.text_area :address, :class => 'textarea-small'
   %tr
     %td
-      %label Biography = link to "What Is This?", "/staff_profile_help.html" :class => "help" :anchor => "biography", target => "_blank"
+      %label Biography 
+      = link_to "What Is This?", "/staff_profile_help.html", :class => "help", :anchor => "biography", :target => "_blank"
   %tr
     %td
       = f.text_area :biography, :class => 'textarea-large'
   %tr
     %td
-      %label Affiliations = link to "What Is This?", "/staff_profile_help.html" :class => "help" :anchor => "affiliations", target => "_blank"
+      %label Affiliations 
+      = link_to "What Is This?", "/staff_profile_help.html", :class => "help", :anchor => "affiliations", :target => "_blank"
   %tr
     %td
       = f.text_area :affiliations, :class => 'textarea-small'
   %tr
     %td
-      %label Research = link to "What Is This?", "/staff_profile_help.html" :class => "help" :anchor => "research", target => "_blank"
+      %label Research 
+      = link_to "What Is This?", "/staff_profile_help.html", :class => "help", :anchor => "research", :target => "_blank"
   %tr
     %td
       = f.text_area :research, :class => 'textarea-small'
   %tr
     %td
-      %label Clinical Interests = link to "What Is This?", "/staff_profile_help.html" :class => "help" :anchor => "clinical-interests", target => "_blank"
+      %label Clinical Interests 
+      = link_to "What Is This?", "/staff_profile_help.html", :class => "help", :anchor => "clinical-interests", :target => "_blank"
   %tr
     %td
       = f.text_area :clinical_interests, :class => 'textarea-small'
   %tr
     %td
-      %label Publications (Must be in BIBTEX format.) = link to "What Is This?", "/staff_profile_help.html" :class => "help" :anchor => "publications", target => "_blank"
+      %label Publications (Must be in BIBTEX format.) 
+      = link_to "What Is This?", "/staff_profile_help.html", :class => "help", :anchor => "publications", :target => "_blank"
   %tr
     %td
       = f.text_area :publications, :class => 'textarea-large'
