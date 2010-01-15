@@ -6,8 +6,11 @@ class StaffProfile < ActiveRecord::Base
 
 
   # Validations
-  validates_presence_of :first_name, :last_name, :position_type_id, :login, :message => 'required'
-  validates_presence_of :password, :password_confirmation, :message => 'required', :if => :new_record?
+  validates_presence_of :first_name, :last_name, :login, :message => 'required'
+  
+  validates_presence_of :password, :password_confirmation, :message => 'required', :if => :new_record? || (!:new_record? && change_password?)
+
+  validates_presence_of :position_type_id, :message => 'required', :unless => :new_record?
 
   validates_uniqueness_of :login, :message => 'login already in use'
 
@@ -102,7 +105,7 @@ class StaffProfile < ActiveRecord::Base
       self.password = sha1(password)
     end
 
-    before_update :encrypt_password_unless_empty_or_unchanged
+    before_update :encrypt_password_unless_empty_or_unchanged, :flip_change_password
     def encrypt_password_unless_empty_or_unchanged
       user = self.class.find(self.id)
       case password
@@ -112,5 +115,9 @@ class StaffProfile < ActiveRecord::Base
       else
         encrypt_password
       end
+    end
+
+    def flip_change_password
+      self.change_password = false if change_password?
     end
 end
