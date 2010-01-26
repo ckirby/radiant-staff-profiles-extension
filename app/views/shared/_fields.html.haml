@@ -107,9 +107,6 @@
       = f.collection_select :status_id, Status.find_all, :id, :name, {:disabled => lambda{|status| status.name == "Hidden" || status.name == "Reviewed" }}, :class => "help", :target => "_blank"
   %tr
     %td
-      = f.collection_select :status_id, Status.find_all, :id, :name, {}, :class => 'selectbox'
-  %tr
-    %td
       %label Photo
   %tr
     %td
