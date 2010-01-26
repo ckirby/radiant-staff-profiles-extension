@@ -18,11 +18,16 @@ class PositionType
     @@postionType.find { |positionType| positionType.id.to_s == id.to_s }
   end
 
+  def self.find_all_with_names
+    @@postionType.dup.delete_if { |positionType| positionType.id == 0 }
+  end
+
   def self.find_all
     @@postionType.dup
   end
 
   @@postionType = [
+    PositionType.new(:id => 0, :name => ''    ),
     PositionType.new(:id => 1, :name => 'Faculty'    ),
     PositionType.new(:id => 2, :name => 'Fellows' ),
     PositionType.new(:id => 3, :name => 'Staff'),

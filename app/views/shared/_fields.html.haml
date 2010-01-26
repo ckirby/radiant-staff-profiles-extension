@@ -4,7 +4,7 @@
       %label Position Type (required) 
   %tr
     %td
-      = f.collection_select :position_type_id, PositionType.find_all, :id, :name, { :include_blank => true }, :class => 'selectbox'
+      = f.collection_select :position_type_id, PositionType.find_all_with_names, :id, :name, { :include_blank => true }, :class => 'selectbox'
   %tr
     %td
       %label Username (required)

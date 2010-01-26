@@ -98,10 +98,14 @@ class StaffProfile < ActiveRecord::Base
       new_record? or not password.to_s.empty?
     end
 
-    before_create :encrypt_password
+    before_create :encrypt_password, :set_position_type_id
     def encrypt_password
       self.salt = Digest::SHA1.hexdigest("--#{Time.now}--#{login}--sweet harmonious biscuits--")
       self.password = sha1(password)
+    end
+
+    def set_position_type_id
+      self.position_type_id = 0 if (position_type_id == nil)
     end
 
     before_update :encrypt_password_unless_empty_or_unchanged

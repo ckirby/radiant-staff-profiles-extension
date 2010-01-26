@@ -51,7 +51,7 @@
               -else
                 = profile.lookup_name
 		  
-          %td.status= profile.position.name 
+          %td.position= profile.position.name
           %td.title= profile.title
           %td.status{:class => "#{profile.status.name.downcase}-status"}= profile.status.name
           %td.updated= profile.updated_at
