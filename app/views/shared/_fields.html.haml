@@ -104,8 +104,9 @@
   %tr
     %td
       %label Status
-      = f.collection_select :status_id, Status.find_all, :id, :name, {:disabled => lambda{|status| status.name == "Hidden" || status.name == "Reviewed" }}, :class => "help", :target => "_blank"
-  %tr
+      = f.collection_select :status_id, Status.find_all, :id, :name, {:disabled => lambda{|status| status.name == "Hidden" || status.name == "Reviewed" }}
+      = link_to "What Is This?", "/staff_profile_help.html#status", :class => "help", :target => "_blank"
+ %tr
     %td
       %label Photo
   %tr
